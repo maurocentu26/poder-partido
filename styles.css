@@ -15,12 +15,13 @@ ul {
     --yell-brown: #e6e6dd;
     --yellow-dark: #313129;
     --light-blue: #d0dce9;
+    --light-medium-blue: #105196;
 }
 /*  End color settings */
 
 /* Header settings */
 header {
-    height: 4rem;
+    height: 6rem;
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -29,15 +30,16 @@ header {
     background-color: var(--yell-brown);
     overflow: hidden;
     border-bottom: 2px solid #000;
+    z-index: 10;
 }
 
-.header__img {
-    width: 3rem;
-}
+/* .header__img {
+    width: 5rem;
+} */
 
 .header__img img {
     display: block;
-    width: 4rem;
+    width: 7rem;
 }
 
 .header__link {
@@ -133,6 +135,7 @@ body{
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    position: sticky;
 }
 
 .propuestas__title {
@@ -141,8 +144,33 @@ body{
     font-weight: 800;
 }
 
+.main__intro {
+    display: flex;
+    justify-content: center;
+    max-width: 80rem;
+    height: 100%;
+    align-items: center;
+    align-self: center;
+}
+.main__container {
+    display: flex;
+}
+.main__img {
+    width: auto;
+    height: 100%;
+}
+.main__intro .main__text{
+    font-weight: 600;
+    width: 40%;
+    padding: 0 2rem;
+}
+.main__intro .main__text .main__paragraph {
+    margin-top: 1rem;
+}
+
 .propuestas__list .acord__btn{
     font-family: "Anton", sans-serif;
+    cursor: pointer;
     display: block;
     width: 100%;
     padding: 2rem 0;
@@ -154,10 +182,25 @@ body{
     color: #000;
     text-align: center;
     letter-spacing: .2rem;
+    transition: .5s;
+}
+.propuestas__list .acord__btn:hover {
+    background-color: var(--light-medium-blue);
+}
+
+.propuestas__list .acord__btn:after {
+    content: '\002795'; /* Unicode character for "plus" sign (+) */
+    position: absolute;
+    z-index: 0;
+    font-size: 13px;
+    color: #777;
 }
 
 .propuestas__list .acord__btn.active {
     background: #fff;
+}
+.propuestas__list .acord__btn.active::after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
 }
 
 .highlight {
@@ -205,3 +248,24 @@ footer {
     background: #000;
 }
 /* End footer settings */
+/* Accordion settings */
+.panel {
+    padding: 0 18px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
+    padding: 2rem 4rem;
+}
+/* End Accordion settings */
+
+/* media settings */
+@media (max-width: 768px) {
+    .main__intro {
+        flex-direction: column;
+    }
+
+    .main__intro .main__text {
+        width: unset;
+    }
+}
+/* end media settings */
