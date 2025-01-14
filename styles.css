@@ -186,6 +186,7 @@ body{
 }
 .propuestas__list .acord__btn:hover {
     background-color: var(--light-medium-blue);
+    color: #000;
 }
 
 .propuestas__list .acord__btn:after {
