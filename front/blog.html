@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="api-base-url" content="http://localhost:3000">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+	<title>PODER — Blog</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<header class="header">
+		<div class="header__img">
+			<img src="img/palabra-azul.png" alt="Logo partido político Poder">
+		</div>
+		<nav class="header__nav" aria-label="Navegación">
+			<a class="header__navLink" href="index.html#propuestas">Propuestas</a>
+			<a class="header__navLink" href="blog.html">Blog</a>
+		</nav>
+	</header>
+
+	<div class="hero hero--compact">
+		<div class="hero__container">
+			<div class="box">
+				<div class="hero__text">
+					<h1>Blog</h1>
+					<p class="animate__animated fadeIn">Novedades, ideas y propuestas. Un espacio para contar qué hacemos y por qué.</p>
+				</div>
+				<a href="#blog" class="btn1">Ver artículos</a>
+				<a href="index.html#propuestas" class="btn2">Volver a propuestas</a>
+			</div>
+		</div>
+	</div>
+
+	<section class="blog" id="blog">
+		<h2 class="propuestas__title">Últimas publicaciones</h2>
+		<div id="blog-status" class="blog__status">Cargando posts…</div>
+		<div id="blog-posts" class="blog__posts"></div>
+		<div id="blog-article" class="blog__article" hidden></div>
+
+		<p class="blog__intro">
+			Acá vas a encontrar artículos con ideas, diagnósticos y líneas de acción. Si querés sugerir un tema o acercar una propuesta,
+			podés escribirnos y lo sumamos a la agenda.
+		</p>
+
+		<div class="blog__info">
+			<div class="blog__infoCard">
+				<h3 class="blog__infoTitle">Qué vas a encontrar</h3>
+				<ul class="blog__infoList">
+					<li>Publicaciones ordenadas por fecha.</li>
+					<li>Artículos con imágenes y contenido completo.</li>
+					<li>Lectura rápida, sin recargas ni vueltas.</li>
+				</ul>
+			</div>
+			<div class="blog__infoCard">
+				<h3 class="blog__infoTitle">Sugerí un tema</h3>
+				<p class="blog__infoText">
+					Queremos que el blog sea útil. Si hay un problema puntual que te preocupa, sugerinos un tema y lo trabajamos.
+				</p>
+				<a class="btn1 blog__cta" href="mailto:contacto@poder.ar">Escribir un correo</a>
+			</div>
+		</div>
+	</section>
+
+	<footer class="footer">
+		<p class="footer__paragraph">
+			PARA DESCARGAR EL PROGRAMA DE REFORMAS COMPLETO HACÉ CLICK ACÁ
+		</p>
+		<a href="#" class="footer__link">Descargar programa</a>
+	</footer>
+
+	<script defer src="app.js"></script>
+</body>
+</html>
