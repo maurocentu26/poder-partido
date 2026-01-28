@@ -662,7 +662,67 @@ function escapeHtml(s) {
     .replaceAll("'", '&#039;');
 }
 
+const THEME_STORAGE_KEY = 'poder-theme';
+
+function readStoredTheme() {
+  try {
+    const v = localStorage.getItem(THEME_STORAGE_KEY);
+    return v === 'dark' || v === 'light' ? v : null;
+  } catch {
+    return null;
+  }
+}
+
+function storeTheme(theme) {
+  try {
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
+  } catch {
+    // no-op
+  }
+}
+
+function resolveInitialTheme() {
+  const stored = readStoredTheme();
+  if (stored) return stored;
+
+  try {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  } catch {
+    return 'light';
+  }
+}
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+}
+
+function updateThemeToggleLabel(btn, theme) {
+  // Mostramos el icono del tema al que se cambia (UX típico)
+  const isDark = theme === 'dark';
+  btn.textContent = isDark ? '☀' : '☾';
+  btn.setAttribute('aria-label', isDark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro');
+  btn.setAttribute('title', isDark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro');
+}
+
+function initThemeToggle() {
+  const btn = document.querySelector('[data-theme-toggle]');
+  const initial = resolveInitialTheme();
+  applyTheme(initial);
+
+  if (!(btn instanceof HTMLButtonElement)) return;
+  updateThemeToggleLabel(btn, initial);
+
+  btn.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    storeTheme(next);
+    updateThemeToggleLabel(btn, next);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
   initIntroSlider();
   initProposalsCards();
   new BlogApp().start();

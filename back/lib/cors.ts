@@ -21,13 +21,18 @@ export function corsHeaders(req: Request): HeadersInit {
   // In local dev, allow any origin to reduce friction.
   const allowAnyInDev = process.env.NODE_ENV !== 'production' && allowed.length === 0;
 
-  const isAllowed = allowAnyInDev || allowed.includes(origin);
+  const allowAnyViaWildcard = allowed.includes('*');
+
+  const isAllowed = allowAnyInDev || allowAnyViaWildcard || allowed.includes(origin);
   if (!isAllowed) return {};
+
+  const requestedHeaders = req.headers.get('access-control-request-headers');
+  const allowHeaders = requestedHeaders?.trim() ? requestedHeaders : 'Content-Type, Authorization';
 
   return {
     'Access-Control-Allow-Origin': origin,
     'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Access-Control-Allow-Headers': allowHeaders,
     'Access-Control-Max-Age': '86400',
     Vary: 'Origin',
   };

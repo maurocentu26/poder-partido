@@ -1,8 +1,25 @@
 import prismaPkg from '@prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
+import pgPkg from 'pg';
 import bcrypt from 'bcryptjs';
 
 const { PrismaClient } = prismaPkg;
-const prisma = new PrismaClient();
+const { Pool } = pgPkg;
+
+function getConnectionString() {
+  const raw = process.env.DIRECT_URL || process.env.DATABASE_URL || '';
+  return String(raw).replace(/^"|"$/g, '').trim();
+}
+
+const connectionString = getConnectionString();
+if (!connectionString) {
+  throw new Error('Set DIRECT_URL (preferred) or DATABASE_URL before running the seed.');
+}
+
+const pool = new Pool({ connectionString });
+const prisma = new PrismaClient({
+  adapter: new PrismaPg(pool),
+});
 
 async function main() {
   const adminEmail = process.env.ADMIN_EMAIL || 'admin@local';

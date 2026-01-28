@@ -74,6 +74,7 @@ Abrir http://localhost:3000
 2) En Vercel, importar el repo y setear **Root Directory = `back`**.
 3) Variables de entorno en Vercel (Production + Preview):
 	- `DATABASE_URL`
+	- `DIRECT_URL` (recomendado; necesario si `DATABASE_URL` usa pooler como Supabase :6543)
 	- `ADMIN_EMAIL`
 	- `ADMIN_PASSWORD`
 	- `CORS_ORIGINS` (URL del front)

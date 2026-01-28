@@ -9,5 +9,8 @@ export default defineConfig({
   },
   datasource: {
     url: env('DATABASE_URL'),
+    // Recommended for providers like Supabase when DATABASE_URL points to a pooler.
+    // Prisma Migrate works best with a direct connection.
+    directUrl: process.env.DIRECT_URL ? env('DIRECT_URL') : undefined,
   },
 });
